@@ -1,0 +1,48 @@
+*{
+    margin: 0rem;
+    padding: 0rem;
+    background-color: aqua;
+}
+.start_quiz_btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    color: darkcyan;
+    background-color:honeydew;
+    display: none;
+}
+.question_box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: solid;
+    padding: 10px 20px;
+
+    
+    /* display: none; */
+}
+.answers{
+    background-color:aliceblue;
+    display: flex;
+    border-style: solid;
+    margin: 2px;
+    padding px;
+}
+.question_prompt {
+    display: inline-flex; 
+    margin-right: 30rem;
+    
+}
+.timer {
+    
+}
+footer {
+    display: flex;
+    text-align: center;
+}
+.total_que {
+    display: inline-flex;
+}

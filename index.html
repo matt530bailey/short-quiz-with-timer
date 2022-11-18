@@ -9,10 +9,10 @@
 </head>
 <body>
     <section>
-        <button class="start_quiz_btn">Start</button>
+        <button class="start_quiz_btn" onclick="style.display = 'none'">Start</button>
     </section>
     <secion class="question_box">
-        <header class="question_prompt">Question
+        <header class="question_prompt">Question<br>Question<br>Question<br>Question???
             <div class="timer">30</div>
         </header>
         <article class="options">
@@ -20,13 +20,15 @@
             <span class="answers">Answer 2</span>
             <span class="answers">Answer 3</span>
             <span class="answers">Answer 4</span>
+            <footer>
+                <div class="total_que">
+                    <p class="question_counter">1</p><p> of 5 Questions</p>
+                    <button class="next_question">Next</button>
+                </div>
+            </footer>
         </article>
     </secion>
-    <footer>
-        <div class="total_que">
-            <p class="question_counter">1</p><p>of 5 Questions</p>
-            <button class="next_question">Next</button>
-        </div>
-    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="script.js"></script>
 </body> 
 </html>

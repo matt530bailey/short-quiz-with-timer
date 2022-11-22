@@ -13,7 +13,6 @@
     padding: 10px;
     color: darkcyan;
     background-color:honeydew;
-    /* display: none; */
 }
 .next_question {
     background-color: honeydew;
@@ -21,22 +20,22 @@
     margin-left: 5rem;
     
 }
-.question_box {
+#question_box {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border: solid;
     padding: 10px 20px;
-
-    
-    display: none;
 }
-.answers{
+
+.answer_btn{
     background-color:aliceblue;
     display: flex;
     border-style: solid;
-    margin: 2px;
+    margin: 3px;
+    padding: 2px;
+    width: 100%;
 }
 header {
     display: flex;
@@ -46,7 +45,7 @@ header {
     display: flex;
     align-items: center;
 }
-.timer {
+#timer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,8 +54,10 @@ header {
     border: solid;
     font-size: larger;
     font-weight: bolder;
-
+    background-color:honeydew;
+    margin: 5px;
 }
+
 .question_box header {
     width: 100%;
 }
@@ -66,4 +67,8 @@ footer {
 }
 .total_que {
     display: inline-flex;
+}
+
+.hide {
+    display: none;
 }

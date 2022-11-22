@@ -34,7 +34,7 @@ function checkGameOver() {
     if (questionIndex < questions.length) {
         true
     } else {
-        score.innerHTML = scoreKeeper
+        document.querySelector('.score_card').innerHTML = 
     }
     // display score
     // return false
@@ -73,13 +73,14 @@ function selectAnswer(event) {
     var button = event.target;
     var isCorrect = Boolean(button.getAttribute('data-is-correct'));
     // need to add -- to timer() for incorrect 
-    if (isCorrect) {
+    if ('data-is-correct') {
         scoreKeeper++
     } else {
         timeRemaining -= 5
     }
     questionIndex++
     setNextQuestion()
+    console.log(scoreKeeper);
 }
 
 

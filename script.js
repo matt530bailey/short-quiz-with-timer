@@ -19,7 +19,7 @@ start_quiz_btn.addEventListener('click', () => {
 function timer() {
     setInterval(() => {
         timeRemaining--
-        if (timeRemaining == 0) {
+        if (timeRemaining <= 0) {
             endGameScreen();
             return;
         }

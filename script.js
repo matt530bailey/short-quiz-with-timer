@@ -6,7 +6,7 @@ var answerGrid = document.querySelector(".answers");
 var score = document.querySelector('.score_card');
 var scoreKeeper = 0;
 var questionIndex = 0;
-var timeRemaining = 5;
+var timeRemaining = 999;
 
 start_quiz_btn.addEventListener('click', () => {
     timer();
@@ -44,12 +44,12 @@ function checkGameOver() {
     // return false
 }
 function endGameScreen() {
-        console.log('please work');
+    console.log('please work');
 }
 
 function setNextQuestion() {
-    var currentQuesiton = questions[questionIndex];
     var optionsContainer = document.querySelector('.options');
+    var currentQuesiton = questions[questionIndex];
     optionsContainer.innerHTML = ''
     // find header element
     console.log(document.querySelector('.question'));
@@ -62,8 +62,9 @@ function setNextQuestion() {
         var button = document.createElement('button')
         button.textContent = choice.text
         button.addEventListener('click', selectAnswer)
-        button.setAttribute('data-is-correct', choice.correct)
+        button.setAttribute('value', choice.text)
         optionsContainer.appendChild(button)
+        button.setAttribute('class', 'answer_btn')
     }
     // trying to create a space between questionNum and other hardcoded HTML
     var questionNum = (questionIndex + 1).toString()
@@ -75,11 +76,13 @@ function selectAnswer(event) {
     event.preventDefault()
     console.log(event.target);
     var button = event.target;
-    var isCorrect = Boolean(button.getAttribute('data-is-correct'));
+    // var isCorrect = Boolean(button.getAttribute('data-is-correct'));
     // problem with for loop - both if else noted
-    if (true) {
+    if (event.target.value === questions[questionIndex].correctAnswer) {
+
         // scoreKeeper is adding no matter correct or not 
         scoreKeeper++
+        console.log(scoreKeeper);
     } else {
         // time subtract not working need to link to timer()
         timeRemaining -= 5
@@ -108,7 +111,8 @@ var questions = [
             { text: '1738', correct: false },
             { text: '1313', correct: false },
             { text: '1510', correct: true }
-        ]
+        ],
+        correctAnswer: '1510'
     },
     {
         question: 'How many different classes of Rum are there?',

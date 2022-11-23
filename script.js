@@ -1,43 +1,50 @@
-var start_quiz_btn = document.querySelector(".start_quiz_btn")
-var questionContainer = document.querySelector("#question_box")
-var timerEl = document.querySelector("#timer")
-var questionEl = document.querySelector(".question")
-var answerGrid = document.querySelector(".answers")
-var score = document.querySelector('.score_card')
-var scoreKeeper = 0
-var questionIndex = 0
-var timeRemaining = 15
+var start_quiz_btn = document.querySelector(".start_quiz_btn");
+var questionContainer = document.querySelector("#question_box");
+var timerEl = document.querySelector("#timer");
+var questionEl = document.querySelector(".question");
+var answerGrid = document.querySelector(".answers");
+var score = document.querySelector('.score_card');
+var scoreKeeper = 0;
+var questionIndex = 0;
+var timeRemaining = 5;
 
 start_quiz_btn.addEventListener('click', () => {
     timer();
     setNextQuestion();
     start_quiz_btn.classList.add("hide");
     questionContainer.classList.remove("hide");
-    timerEl.classList.remove('hide')
-
-
-
+    timerEl.classList.remove('hide');
 })
 
 function timer() {
     setInterval(() => {
         timeRemaining--
-        if (timeRemaining < 1) {
+        if (timeRemaining == 0) {
+            endGameScreen();
             return;
         }
+        document.getElementById('timer').innerHTML = timeRemaining.toString();
         console.log(timeRemaining);
     }, 1000);
 }
 
+// do i need to check if game is over if i can write it in to a end of game sequence?
+// breaking appart functions concept - check game over y/n if yes run end game sequence
+// 
 function checkGameOver() {
-    // if questionIndex < questions.length 
-    if (questionIndex < questions.length) {
-        true
+    // // if questionIndex < questions.length 
+    // have boolean is game over
+    if (questionIndex < questions.length - 1) {
+        return false
+        // else 
     } else {
-        document.querySelector('.score_card').innerHTML = 
+        return true
     }
     // display score
     // return false
+}
+function endGameScreen() {
+        console.log('please work');
 }
 
 function setNextQuestion() {
@@ -57,33 +64,42 @@ function setNextQuestion() {
         button.addEventListener('click', selectAnswer)
         button.setAttribute('data-is-correct', choice.correct)
         optionsContainer.appendChild(button)
-
     }
+    // trying to create a space between questionNum and other hardcoded HTML
+    var questionNum = (questionIndex + 1).toString()
+    questionNum = (questionNum + " ");
+    document.getElementById('questionNo').innerHTML = questionNum + " ";
 
 }
-
-function showQuestion() {
-    // grabs first question & answer in array
-
-}
-
 function selectAnswer(event) {
     event.preventDefault()
     console.log(event.target);
     var button = event.target;
     var isCorrect = Boolean(button.getAttribute('data-is-correct'));
-    // need to add -- to timer() for incorrect 
-    if ('data-is-correct') {
+    // problem with for loop - both if else noted
+    if (true) {
+        // scoreKeeper is adding no matter correct or not 
         scoreKeeper++
     } else {
+        // time subtract not working need to link to timer()
         timeRemaining -= 5
     }
-    questionIndex++
-    setNextQuestion()
-    console.log(scoreKeeper);
+    if (checkGameOver()) {
+        // call new func or give statement of what to do -wtf do i need to do? 
+        // populate window or popup
+        // prompt user to input name to add to record of score
+        // show final tally of all attempts
+        console.log('GameOver?');
+        endGameScreen()
+    } else {
+        questionIndex++
+        setNextQuestion()
+
+    }
+    // console.log(scoreKeeper); 
 }
 
-
+// can be referened to as data set arrow down
 var questions = [
     {
         question: 'When does Benedictine claim to be invented?',

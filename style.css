@@ -5,6 +5,7 @@
     font-family: 'Franklin Gothic Medium';
     
 }
+
 .start_quiz_btn {
     position: absolute;
     top: 50%;
@@ -69,6 +70,7 @@ footer {
     display: inline-flex;
 }
 
+/* hide sequence class for game function */
 .hide {
-    display: none;
+    display: none !important;
 }

@@ -6,7 +6,7 @@ var answerGrid = document.querySelector(".answers");
 var score = document.querySelector('.score_card');
 var scoreKeeper = 0;
 var questionIndex = 0;
-var timeRemaining = 999;
+var timeRemaining = 3;
 
 start_quiz_btn.addEventListener('click', () => {
     timer();
@@ -17,10 +17,11 @@ start_quiz_btn.addEventListener('click', () => {
 })
 
 function timer() {
-    setInterval(() => {
+    var time = setInterval(() => {
         timeRemaining--
         if (timeRemaining <= 0) {
             endGameScreen();
+            clearInterval(time)
             return;
         }
         document.getElementById('timer').innerHTML = timeRemaining.toString();
@@ -38,14 +39,36 @@ function checkGameOver() {
         return false
         // else 
     } else {
+        timeRemaining = 0
         return true
     }
     // display score
     // return false
 }
 function endGameScreen() {
-    console.log('please work');
+    var gameOverHeader = document.createElement('h3');
+    gameOverHeader.textContent = 'Game Over';
+    var nameInput = document.createElement('input');
+    var parentSection = document.querySelector('#parentSection');
+    var saveNameBtn = document.createElement('button');
+    saveNameBtn.textContent = 'Save';
+    // console.log not working cant find saved info
+    // not sure if info is saving - need to add to local storage 
+    // create local storage var or some shit to reference
+    parentSection.appendChild(gameOverHeader);
+    parentSection.appendChild(nameInput);
+    parentSection.appendChild(saveNameBtn);
+    questionContainer.classList.add('hide');
+    timerEl.classList.add('hide');
+
+
+    saveNameBtn.addEventListener('click', () => {
+        localStorage.setItem('name', nameInput.value);
+        console.log(localStorage);
+    });
 }
+
+
 
 function setNextQuestion() {
     var optionsContainer = document.querySelector('.options');
@@ -121,7 +144,8 @@ var questions = [
             { text: '8', correct: true },
             { text: '5', correct: false },
             { text: '2', correct: false }
-        ]
+        ],
+        correctAnswer: '8'
     },
     {
         question: 'Agave that claims to be 100% agave can still contain how much additive?',
@@ -130,16 +154,18 @@ var questions = [
             { text: '1%', correct: true },
             { text: '5%', correct: false },
             { text: '10%', correct: false }
-        ]
+        ],
+        correctAnswer: '1%'
     },
     {
         question: 'Natural wine means?',
         answers: [
-            { text: 'No/minimal intervention is made in the process ', correct: true },
+            { text: 'No/minimal intervention is made in the process', correct: true },
             { text: 'No yeast is added ', correct: false },
             { text: 'Grapes are certified organic', correct: false },
             { text: 'No suffer is added', correct: false }
-        ]
+        ],
+        correctAnswer: 'No/minimal intervention is made in the process'
     },
     {
         question: 'The 1751 depiction of Gin Ally shows:',
@@ -147,7 +173,8 @@ var questions = [
             { text: 'The joys that are, Gin', correct: false },
             { text: 'The process of making Gin', correct: false },
             { text: 'The taverns full of drunks', correct: false },
-            { text: 'The lewd behaviors of people consuming Gin ', correct: true }
-        ]
+            { text: 'The lewd behaviors of people consuming Gin', correct: true }
+        ],
+        correctAnswer: 'The lewd behaviors of people consuming Gin'
     }
 ]

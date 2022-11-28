@@ -6,7 +6,7 @@ var answerGrid = document.querySelector(".answers");
 var score = document.querySelector('.score_card');
 var scoreKeeper = 0;
 var questionIndex = 0;
-var timeRemaining = 3;
+var timeRemaining = 6;
 
 start_quiz_btn.addEventListener('click', () => {
     timer();
@@ -39,7 +39,8 @@ function checkGameOver() {
         return false
         // else 
     } else {
-        timeRemaining = 0
+        // timeRemaining = 0
+        endGameScreen() //~this line was causing endGameScreen to run twice near line 121
         return true
     }
     // display score
@@ -115,8 +116,8 @@ function selectAnswer(event) {
         // populate window or popup
         // prompt user to input name to add to record of score
         // show final tally of all attempts
-        console.log('GameOver?');
-        endGameScreen()
+        console.log('GameOver?'); // this line will only log when the set of questions are answered before timelimit
+        // endGameScreen() // WHY DID THIS NOT WORK?? Was causing endGameScreen to populate twice when making it through all the quesitons before end of time limit
     } else {
         questionIndex++
         setNextQuestion()

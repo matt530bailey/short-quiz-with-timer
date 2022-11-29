@@ -87,7 +87,9 @@ function finGame() {
 
     startAgainBtn.setAttribute('class', 'answer_btn');
     startAgainBtn.textContent = 'Play Again';
-    startAgainBtn.addEventListener('click', setNextQuestion());
+    startAgainBtn.addEventListener('click', () => {
+        
+    })
 
 }
 

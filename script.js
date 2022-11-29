@@ -6,7 +6,7 @@ var answerGrid = document.querySelector(".answers");
 var score = document.querySelector('.score_card');
 var scoreKeeper = 0;
 var questionIndex = 0;
-var timeRemaining = 6;
+var timeRemaining = 999;
 
 start_quiz_btn.addEventListener('click', () => {
     timer();
@@ -21,7 +21,7 @@ function timer() {
         timeRemaining--
         if (timeRemaining <= 0) {
             endGameScreen();
-            clearInterval(time)
+            clearInterval(time);
             return;
         }
         document.getElementById('timer').innerHTML = timeRemaining.toString();
@@ -39,8 +39,8 @@ function checkGameOver() {
         return false
         // else 
     } else {
-        // timeRemaining = 0
-        endGameScreen() //~this line was causing endGameScreen to run twice near line 121
+        timeRemaining = 0
+        // endGameScreen() //~this line was causing endGameScreen to run twice near line 121 due to time ending and causing function to run
         return true
     }
     // display score
@@ -53,6 +53,8 @@ function endGameScreen() {
     var parentSection = document.querySelector('#parentSection');
     var saveNameBtn = document.createElement('button');
     saveNameBtn.textContent = 'Save';
+
+
     // console.log not working cant find saved info
     // not sure if info is saving - need to add to local storage 
     // create local storage var or some shit to reference
@@ -65,10 +67,29 @@ function endGameScreen() {
 
     saveNameBtn.addEventListener('click', () => {
         localStorage.setItem('name', nameInput.value);
-        console.log(localStorage);
+        console.log(localStorage.getItem('name')); //this give the value based on the key - 'name' being the key
+        gameOverHeader.classList.add('hide');
+        nameInput.classList.add('hide');
+        saveNameBtn.classList.add('hide');
+        finGame();
     });
 }
 
+function finGame() {
+    var fin = document.querySelector('#fin');
+    var resultScreen = document.createElement('ul');
+    var startAgainBtn = document.createElement('button');
+    startAgainBtn = start_quiz_btn;
+
+    resultScreen.append(localStorage.getItem('name'), ' ', scoreKeeper);
+    fin.appendChild(resultScreen);
+    fin.appendChild(startAgainBtn);
+
+    startAgainBtn.setAttribute('class', 'answer_btn');
+    startAgainBtn.textContent = 'Play Again';
+    startAgainBtn.addEventListener('click', setNextQuestion());
+
+}
 
 
 function setNextQuestion() {

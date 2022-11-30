@@ -1,7 +1,7 @@
 var start_quiz_btn = document.querySelector(".start_quiz_btn");
 var questionContainer = document.querySelector("#question_box");
 var timerEl = document.querySelector("#timer");
-var resultScreen = document.createElement('ul');
+// var resultScreen = document.createElement('ul');
 var questionEl = document.querySelector(".question");
 var answerGrid = document.querySelector(".answers");
 var score = document.querySelector('.score_card');
@@ -78,9 +78,10 @@ function endGameScreen() {
 
 function finGame() {
     var fin = document.querySelector('#fin');
-    // var resultScreen = document.createElement('ul'); // made individual ul in global scope makes one with all names
+    var resultScreen = document.createElement('ul');
     var startAgainBtn = document.createElement('button');
-    startAgainBtn.addEventListener('click', setNextQuestion);
+    // startAgainBtn = start_quiz_btn;
+    // startAgainBtn.setAttribute('class', 'start_quiz_btn');
 
     resultScreen.append(localStorage.getItem('name'), ' ', scoreKeeper);
     fin.appendChild(resultScreen);
@@ -88,15 +89,22 @@ function finGame() {
 
     startAgainBtn.setAttribute('class', 'answer_btn');
     startAgainBtn.textContent = 'Play Again';
-    // startAgainBtn.addEventListener('click', () => {
-    //     setNextQuestion()
+    startAgainBtn.addEventListener('click', () => {
+        // setNextQuestion() // connected to if else in function
         // resultScreen.classList.add('hide');
-        // })
+        
+        timer();
+        setNextQuestion();
+        start_quiz_btn.classList.add("hide");
+        questionContainer.classList.remove("hide");
+        timerEl.classList.remove('hide');
+    
+        })
     }
 
 
 function setNextQuestion() {
-    if (localStorage == 0) {
+    // if (localStorage.value == 0) {
     var optionsContainer = document.querySelector('.options');
     var currentQuesiton = questions[questionIndex];
     optionsContainer.innerHTML = ''
@@ -106,24 +114,28 @@ function setNextQuestion() {
     console.log(questions[questionIndex].question);
     // Set text cont for header
     document.querySelector('.question').textContent = currentQuesiton.question
-    for (var i = 0; i < currentQuesiton.answers.length; i++) {
-        var choice = currentQuesiton.answers[i];
+    for (var i = 0; i < questions.length; i++) {
+        console.log(typeof questions);
+        for (let j = 0; j < questions[i].answers.length; j++) {
+            
+     
+        var choice = questions[i].answers[j];
         var button = document.createElement('button')
         button.textContent = choice.text
         button.addEventListener('click', selectAnswer)
         button.setAttribute('value', choice.text)
         optionsContainer.appendChild(button)
         button.setAttribute('class', 'answer_btn')
+        }
     }
     // trying to create a space between questionNum and other hardcoded HTML
     var questionNum = (questionIndex + 1).toString()
     document.getElementById('questionNo').innerHTML = questionNum + " ";
-    } else {
-        questionNum = 1;
-        questionIndex = 0;
-        console.log(questionIndex);
-        setNextQuestion();
-    }
+    // } else {
+    //     questionNum = 1;
+    //     questionIndex = 0;
+    //     setNextQuestion();
+    // }
 }
 function selectAnswer(event) {
     event.preventDefault()

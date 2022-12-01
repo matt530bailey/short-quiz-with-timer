@@ -88,15 +88,20 @@ function finGame() {
 
     startAgainBtn.setAttribute('class', 'answer_btn');
     startAgainBtn.textContent = 'Play Again';
-    // startAgainBtn.addEventListener('click', () => {
-    //     setNextQuestion()
-        // resultScreen.classList.add('hide');
-        // })
+    startAgainBtn.addEventListener('click', () => {
+        questionIndex = 0;
+        timeRemaining = 999;
+        timer();
+        setNextQuestion();
+        questionContainer.classList.remove("hide");
+        timerEl.classList.remove('hide');
+        resultScreen.classList.add('hide');
+        })
     }
 
 
 function setNextQuestion() {
-    if (localStorage == 0) {
+    // if (localStorage == 0) {
     var optionsContainer = document.querySelector('.options');
     var currentQuesiton = questions[questionIndex];
     optionsContainer.innerHTML = ''
@@ -118,12 +123,12 @@ function setNextQuestion() {
     // trying to create a space between questionNum and other hardcoded HTML
     var questionNum = (questionIndex + 1).toString()
     document.getElementById('questionNo').innerHTML = questionNum + " ";
-    } else {
-        questionNum = 1;
-        questionIndex = 0;
-        console.log(questionIndex);
-        setNextQuestion();
-    }
+    // } else {
+    //     questionNum = 1;
+    //     questionIndex = 0;
+    //     console.log(questionIndex);
+    //     setNextQuestion();
+    // }
 }
 function selectAnswer(event) {
     event.preventDefault()
